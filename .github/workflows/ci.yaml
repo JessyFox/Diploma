@@ -13,7 +13,7 @@ jobs:
       packages: write
       contents: read
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME --label "runnumber=${GITHUB_RUN_ID}"
@@ -41,14 +41,14 @@ jobs:
       packages: write
       issues: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin      
 
       - name: Scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ghcr.io/jessyfox/my-program:latest
+          image-ref: ghcr.io/jessyfox/demo-project:latest
           format: sarif
           output: 'trivy-results.sarif'
           severity: CRITICAL,HIGH,MEDIUM

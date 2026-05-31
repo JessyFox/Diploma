@@ -277,7 +277,7 @@ impl From<loco_rs::Error> for ApiError {
             Error::Sqlx(_) => ApiError::InternalServerError,
             Error::Storage(e) => ApiError::Storage(e),
             Error::Cache(e) => ApiError::Cache(e),
-            Error::Generators(_) => ApiError::InternalServerError,
+            // Error::Generators(_) => ApiError::InternalServerError,
             Error::VersionCheck(_) => ApiError::InternalServerError,
             Error::SemVer(_) => ApiError::InternalServerError,
             Error::Any(e) => ApiError::Any(e),
