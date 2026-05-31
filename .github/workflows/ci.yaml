@@ -1,9 +1,9 @@
-name: Docker dev
+name: Security Pipeline
 on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: "my-program"
+  IMAGE_NAME: "demo-project"
 
 jobs:
   push:
