@@ -1,0 +1,29 @@
+---
+source: tests/models/refresh_tokens.rs
+expression: refresh_token
+---
+ActiveModel {
+    id: NotSet,
+    user_id: Set(
+        1,
+    ),
+    jti: NotSet,
+    browser: Set(
+        Some(
+            "Brave",
+        ),
+    ),
+    user_ip: Set(
+        Some(
+            "10.10.10.1",
+        ),
+    ),
+    revoked: Set(
+        false,
+    ),
+    created_at: NotSet,
+    updated_at: NotSet,
+    expired_at: Set(
+        DATE,
+    ),
+}

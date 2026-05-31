@@ -1,0 +1,21 @@
+---
+source: tests/models/refresh_tokens.rs
+expression: saved_token
+---
+Ok(
+    Model {
+        id: ID
+        user_id: 1,
+        jti: PID,
+        browser: Some(
+            "Brave",
+        ),
+        user_ip: Some(
+            "10.10.10.1",
+        ),
+        revoked: false,
+        created_at: DATE,
+        updated_at: DATE,
+        expired_at: DATE,
+    },
+)

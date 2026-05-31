@@ -1,0 +1,5 @@
+---
+source: tests/requests/events.rs
+expression: response.text()
+---
+"{\"error\":\"Bad Request\",\"description\":\"This payload types not allowed for that event\"}"

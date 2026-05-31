@@ -1,0 +1,21 @@
+---
+source: tests/models/refresh_tokens.rs
+expression: res
+---
+Ok(
+    Model {
+        id: ID
+        user_id: 1,
+        jti: PID,
+        browser: Some(
+            "Chrome 12.0",
+        ),
+        user_ip: Some(
+            "127.0.0.1",
+        ),
+        revoked: false,
+        created_at: DATE,
+        updated_at: DATE,
+        expired_at: DATE,
+    },
+)

@@ -1,0 +1,5 @@
+---
+source: tests/requests/events.rs
+expression: response.text()
+---
+"{\"error\":\"Unprocessable entity\",\"description\":\"Invalid payload value type\"}"

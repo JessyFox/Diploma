@@ -1,0 +1,8 @@
+---
+source: tests/models/users.rs
+assertion_line: 78
+expression: non_existing_user_results
+---
+Err(
+    EntityNotFound,
+)

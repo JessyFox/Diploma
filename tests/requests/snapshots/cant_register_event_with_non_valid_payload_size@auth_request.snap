@@ -1,0 +1,5 @@
+---
+source: tests/requests/events.rs
+expression: response.text()
+---
+"{\"errors\":{\"value\":[{\"code\":\"length\",\"message\":\"Value cannot exceed 50 characters\",\"params\":{\"max\":50,\"value\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"}}]}}"

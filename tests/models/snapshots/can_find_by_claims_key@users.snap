@@ -1,0 +1,30 @@
+---
+source: tests/models/users.rs
+assertion_line: 175
+expression: validate_token
+---
+Ok(
+    TokenData {
+        header: Header {
+            typ: Some(
+                "JWT",
+            ),
+            alg: HS512,
+            cty: None,
+            jku: None,
+            jwk: None,
+            kid: None,
+            x5u: None,
+            x5c: None,
+            x5t: None,
+            x5t_s256: None,
+        },
+        claims: UserClaims {
+            pid: "11111111-1111-1111-1111-111111111111",
+            exp: "exp_in_seconds",
+            claims: {
+                "id": Number(1),
+            },
+        },
+    },
+)

@@ -1,0 +1,5 @@
+---
+source: tests/requests/events.rs
+expression: response.text()
+---
+"{\"message\":\"Ok\"}"

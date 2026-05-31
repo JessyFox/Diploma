@@ -1,0 +1,5 @@
+---
+source: tests/requests/events.rs
+expression: response.text()
+---
+"{\"error\":\"not_found\",\"description\":\"Resource was not found\"}"

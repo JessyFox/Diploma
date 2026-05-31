@@ -1,0 +1,10 @@
+---
+source: tests/models/users.rs
+assertion_line: 38
+expression: res
+---
+Err(
+    Custom(
+        "{\"login\":[{\"code\":\"length\",\"message\":\"Name must be at least 2 characters long.\"}],\"name\":[{\"code\":\"length\",\"message\":\"Name must be at least 2 characters long.\"}]}",
+    ),
+)
