@@ -72,17 +72,17 @@ jobs:
             echo "VULNERABILITIES_FOUND=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Handle vulnerabilities
-        if: steps.check-vulns.outputs.VULNERABILITIES_FOUND == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          # Настраиваем git для gh cli
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+      # - name: Handle vulnerabilities
+      #   if: steps.check-vulns.outputs.VULNERABILITIES_FOUND == 'true'
+      #   env:
+      #     GH_TOKEN: ${{ github.token }}
+      #   run: |
+      #     # Настраиваем git для gh cli
+      #     git config --global user.name "GitHub Actions"
+      #     git config --global user.email "actions@github.com"
           
-          # Создание issue
-          gh issue create \
-            --title "Уведомление безопасности: Уязвимости в ${{ env.IMAGE_NAME }}" \
-            --body "### Критические уязвимости обнаружены, *Уязвимости:** ${{ steps.check-vulns.outputs.VULN_COUNT }}" \
-            --label "security,bug"\
+      #     # Создание issue
+      #     gh issue create \
+      #       --title "Уведомление безопасности: Уязвимости в ${{ env.IMAGE_NAME }}" \
+      #       --body "### Критические уязвимости обнаружены, *Уязвимости:** ${{ steps.check-vulns.outputs.VULN_COUNT }}" \
+      #       --label "security,bug"\
