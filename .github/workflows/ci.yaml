@@ -1,6 +1,9 @@
 name: Security Pipeline
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - master
 
 env:
   IMAGE_NAME: "demo-project"
@@ -42,6 +45,22 @@ jobs:
       issues: write
     steps:
       - uses: actions/checkout@v4
+        # Сканирование репозитория (файловой системы)
+      - name: Scan repository with Trivy (FS)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: sarif
+          output: trivy-repo-results.sarif
+          severity: CRITICAL,HIGH,MEDIUM
+    
+      - name: Upload repo SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-repo-results.sarif
+          category: repo-scan
+
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin      
 
@@ -57,6 +76,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+          category: image-scan
       - name: Check for vulnerabilities
         id: check-vulns
         run: |
