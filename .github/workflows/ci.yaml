@@ -77,32 +77,16 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
           category: image-scan
-      - name: Check for vulnerabilities
-        id: check-vulns
+      - name: Check for vulnerabilities in both scans
         run: |
-          if [ -f "trivy-results.sarif" ]; then
-            VULN_COUNT=$(jq -e '.runs[0].results | length' trivy-results.sarif)
-            if [ "$VULN_COUNT" -gt 0 ]; then
-              echo "VULNERABILITIES_FOUND=true" >> $GITHUB_OUTPUT
-              echo "VULN_COUNT=$VULN_COUNT" >> $GITHUB_OUTPUT
-            else
-              echo "VULNERABILITIES_FOUND=false" >> $GITHUB_OUTPUT
+          total=0
+          for f in trivy-repo-results.sarif trivy-results.sarif; do
+            if [ -f "$f" ]; then
+              count=$(jq '.runs[0].results | length' "$f")
+              total=$((total + count))
             fi
-          else
-            echo "VULNERABILITIES_FOUND=false" >> $GITHUB_OUTPUT
+          done
+          if [ "$total" -gt 0 ]; then
+            exit 1
           fi
 
-      # - name: Handle vulnerabilities
-      #   if: steps.check-vulns.outputs.VULNERABILITIES_FOUND == 'true'
-      #   env:
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     # Настраиваем git для gh cli
-      #     git config --global user.name "GitHub Actions"
-      #     git config --global user.email "actions@github.com"
-          
-      #     # Создание issue
-      #     gh issue create \
-      #       --title "Уведомление безопасности: Уязвимости в ${{ env.IMAGE_NAME }}" \
-      #       --body "### Критические уязвимости обнаружены, *Уязвимости:** ${{ steps.check-vulns.outputs.VULN_COUNT }}" \
-      #       --label "security,bug"\
