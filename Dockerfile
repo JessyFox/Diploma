@@ -6,7 +6,7 @@ COPY . .
 
 RUN cargo build --release
 
-FROM alpine:3.23.4
+FROM debian:bookworm-slim
 
 WORKDIR /usr/app
 
